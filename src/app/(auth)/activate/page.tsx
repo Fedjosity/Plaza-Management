@@ -40,6 +40,9 @@ export default function ActivatePage() {
       if (data.tenantName) {
         sessionStorage.setItem('activate_name', data.tenantName);
       }
+      if (data.devCode) {
+        sessionStorage.setItem('activate_dev_code', data.devCode);
+      }
 
       router.push('/activate/verify');
     } catch (err: any) {

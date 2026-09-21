@@ -15,6 +15,7 @@ export default function VerifyCodePage() {
   const [error, setError] = useState('');
   const [resending, setResending] = useState(false);
   const [countdown, setCountdown] = useState(60);
+  const [devCode, setDevCode] = useState('');
 
   useEffect(() => {
     const saved = sessionStorage.getItem('activate_phone');
@@ -23,6 +24,8 @@ export default function VerifyCodePage() {
       return;
     }
     setPhone(saved);
+    const code = sessionStorage.getItem('activate_dev_code');
+    if (code) setDevCode(code);
   }, [router]);
 
   useEffect(() => {
@@ -111,6 +114,22 @@ export default function VerifyCodePage() {
       }
     >
       <div className="space-y-4">
+        {devCode && (
+          <div className="p-3 text-xs rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between">
+            <span><strong>Dev Test Code:</strong> {devCode}</span>
+            <button
+              type="button"
+              onClick={() => {
+                setCode(devCode);
+                handleVerify(devCode);
+              }}
+              className="text-xs font-bold underline hover:text-emerald-950 cursor-pointer"
+            >
+              Autofill & Verify
+            </button>
+          </div>
+        )}
+
         {error && (
           <div className="p-3 text-xs font-medium text-[#ba1a1a] bg-[#ffdad6]/40 border border-[#ffdad6] rounded-lg">
             {error}
