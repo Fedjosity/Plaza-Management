@@ -13,6 +13,6 @@ export default async function HomePage() {
   if (role === 'admin') {
     redirect('/admin');
   } else {
-    redirect('/shop');
+    redirect('/portal');
   }
 }

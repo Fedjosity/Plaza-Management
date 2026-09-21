@@ -43,7 +43,7 @@ export default function LoginPage() {
       if (data.role === 'admin') {
         router.push('/admin');
       } else {
-        router.push('/shop');
+        router.push('/portal');
       }
     } catch (err: any) {
       setError(err.message);
