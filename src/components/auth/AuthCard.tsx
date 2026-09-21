@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface AuthCardProps {
   imageSrc: string;
@@ -27,10 +27,9 @@ export function AuthCard({
 }: AuthCardProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 bg-[#f6f3f2]">
-      <div className="w-full max-w-4xl bg-white border border-[#e4e2e1] rounded-2xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12 min-h-[580px]">
-        
+      <div className="w-full max-w-4xl bg-white border border-[#e4e2e1] rounded-2xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12 min-h-145">
         {/* Left Side: Visual Documentary Image Panel */}
-        <div className="relative md:col-span-5 bg-[#1b1c1c] text-white p-6 sm:p-8 flex flex-col justify-between overflow-hidden min-h-[220px] md:min-h-full">
+        <div className="relative md:col-span-5 bg-[#1b1c1c] text-white p-6 sm:p-8 flex flex-col justify-between overflow-hidden min-h-55 md:min-h-full">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -39,7 +38,7 @@ export function AuthCard({
             sizes="(max-width: 768px) 100vw, 40vw"
             className="object-cover opacity-60 mix-blend-luminosity hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/30" />
 
           {/* Top Brand Header */}
           <div className="relative z-10">
@@ -60,7 +59,8 @@ export function AuthCard({
               </span>
             )}
             <p className="text-sm font-medium text-stone-200 leading-relaxed drop-shadow-sm">
-              Reliable, transparent rent tracking and direct commercial management for shops and plaza owners.
+              Reliable, transparent rent tracking and direct commercial
+              management for shops and plaza owners.
             </p>
           </div>
         </div>
@@ -88,7 +88,6 @@ export function AuthCard({
             </div>
           )}
         </div>
-
       </div>
     </div>
   );
