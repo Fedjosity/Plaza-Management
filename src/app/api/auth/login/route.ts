@@ -4,19 +4,16 @@ import { normalizePhoneNumber } from '@/lib/utils';
 
 export async function POST(req: Request) {
   try {
-    const { identifier, password, isEmail } = await req.json();
+    const { phone, password } = await req.json();
 
-    if (!identifier || !password) {
-      return NextResponse.json({ error: 'Please enter your login details and password' }, { status: 400 });
+    if (!phone || !password) {
+      return NextResponse.json({ error: 'Please enter your phone number and password' }, { status: 400 });
     }
 
     const supabase = await createClient();
 
-    let emailToAuth = identifier.trim();
-    if (!isEmail) {
-      const normalizedPhone = normalizePhoneNumber(identifier);
-      emailToAuth = `${normalizedPhone.replace('+', '')}@plaza.internal`;
-    }
+    const normalizedPhone = normalizePhoneNumber(phone);
+    const emailToAuth = `${normalizedPhone.replace('+', '')}@plaza.internal`;
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email: emailToAuth,
@@ -30,7 +27,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const role = data.user?.user_metadata?.role || (isEmail ? 'admin' : 'tenant');
+    const role = data.user?.user_metadata?.role || 'tenant';
 
     return NextResponse.json({
       success: true,

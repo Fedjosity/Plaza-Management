@@ -17,7 +17,7 @@ import {
   Clock,
   Banknote
 } from 'lucide-react';
-import { StatusBadge } from '@/components/admin/StatusBadge';
+import { StatusBadge } from '@/components/shared/StatusBadge';
 import { RecordPaymentModal } from '@/components/admin/RecordPaymentModal';
 import { ShopWithTenant, RentPayment } from '@/types/database';
 import { formatNaira, getWhatsAppReminderUrl } from '@/lib/utils';

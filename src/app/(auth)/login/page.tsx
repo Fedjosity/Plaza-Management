@@ -5,13 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AuthCard } from '@/components/auth/AuthCard';
 import { PhoneInput } from '@/components/auth/PhoneInput';
-import { ArrowRight, Lock, Mail, Phone } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [isEmail, setIsEmail] = useState(false);
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,8 +20,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const identifier = isEmail ? email : phone;
-      if (!identifier || !password) {
+      if (!phone || !password) {
         setError('Please fill in all fields');
         setLoading(false);
         return;
@@ -32,7 +29,7 @@ export default function LoginPage() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier, password, isEmail }),
+        body: JSON.stringify({ phone, password }),
       });
 
       const data = await res.json();
@@ -77,51 +74,12 @@ export default function LoginPage() {
           </div>
         )}
 
-        {/* Tenant Phone vs Admin Email Toggle */}
-        <div className="flex items-center justify-between text-xs pb-1">
-          <span className="font-medium text-[#5e5e5e]">Signing in as:</span>
-          <button
-            type="button"
-            onClick={() => {
-              setIsEmail(!isEmail);
-              setError('');
-            }}
-            className="font-semibold text-[#1b1c1c] hover:underline inline-flex items-center gap-1"
-          >
-            {isEmail ? (
-              <>
-                <Phone className="w-3 h-3" /> Tenant (Phone)
-              </>
-            ) : (
-              <>
-                <Mail className="w-3 h-3" /> Manager / Admin (Email)
-              </>
-            )}
-          </button>
-        </div>
-
-        {isEmail ? (
-          <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#444748] mb-1.5">
-              Email Address
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="manager@plaza.com"
-              required
-              className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-[#c4c7c7] bg-[#fcf9f8] text-[#1b1c1c] outline-none focus:border-[#1b1c1c] focus:ring-1 focus:ring-[#1b1c1c]"
-            />
-          </div>
-        ) : (
-          <PhoneInput
-            value={phone}
-            onChange={setPhone}
-            label="Registered Phone Number"
-            required
-          />
-        )}
+        <PhoneInput
+          value={phone}
+          onChange={setPhone}
+          label="Registered Phone Number"
+          required
+        />
 
         <div>
           <div className="flex items-center justify-between mb-1.5">

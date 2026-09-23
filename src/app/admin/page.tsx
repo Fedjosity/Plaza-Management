@@ -16,7 +16,7 @@ import {
   RotateCw,
   Plus
 } from 'lucide-react';
-import { StatusBadge } from '@/components/admin/StatusBadge';
+import { StatusBadge } from '@/components/shared/StatusBadge';
 import { RecordPaymentModal } from '@/components/admin/RecordPaymentModal';
 import { ShopWithTenant } from '@/types/database';
 import { formatNaira, getWhatsAppReminderUrl } from '@/lib/utils';

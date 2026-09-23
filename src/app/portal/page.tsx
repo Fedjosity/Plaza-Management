@@ -16,7 +16,7 @@ import {
   RotateCw,
   QrCode
 } from 'lucide-react';
-import { StatusBadge } from '@/components/admin/StatusBadge';
+import { StatusBadge } from '@/components/shared/StatusBadge';
 import { ReceiptModal } from '@/components/tenant/ReceiptModal';
 import { ShopWithTenant, RentPayment, Tenant } from '@/types/database';
 import { formatNaira } from '@/lib/utils';
