@@ -11,13 +11,12 @@ import {
   TrendingUp, 
   Search, 
   MessageSquare, 
-  CreditCard, 
   ChevronRight,
   RotateCw,
-  Plus
+  Plus,
+  Eye
 } from 'lucide-react';
 import { StatusBadge } from '@/components/shared/StatusBadge';
-import { RecordPaymentModal } from '@/components/admin/RecordPaymentModal';
 import { ShopWithTenant } from '@/types/database';
 import { formatNaira, getWhatsAppReminderUrl } from '@/lib/utils';
 
@@ -39,9 +38,6 @@ export default function AdminDashboardPage() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'overdue' | 'expiring' | 'current' | 'vacant'>('all');
   
-  // Payment modal for specific shop row click
-  const [activePaymentShopId, setActivePaymentShopId] = useState<string | null>(null);
-
   const loadData = async () => {
     try {
       setLoading(true);
@@ -350,15 +346,14 @@ export default function AdminDashboardPage() {
                           </a>
                         )}
 
-                        {/* Record Cash button */}
-                        <button
-                          type="button"
-                          onClick={() => setActivePaymentShopId(shop.id)}
+                        {/* View shop details */}
+                        <Link
+                          href={`/admin/shops/${shop.id}`}
                           className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-stone-100 text-stone-800 hover:bg-stone-200 text-[11px] font-bold transition-colors"
                         >
-                          <CreditCard className="w-3.5 h-3.5" />
-                          <span>Record</span>
-                        </button>
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>View</span>
+                        </Link>
                       </td>
                     </tr>
                   );
@@ -369,19 +364,6 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* In-page modal if invoked from specific row */}
-      {activePaymentShopId && (
-        <RecordPaymentModal
-          isOpen={true}
-          onClose={() => setActivePaymentShopId(null)}
-          onSuccess={() => {
-            setActivePaymentShopId(null);
-            loadData();
-          }}
-          shops={shops}
-          initialShopId={activePaymentShopId}
-        />
-      )}
     </div>
   );
 }
