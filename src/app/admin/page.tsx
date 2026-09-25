@@ -10,13 +10,13 @@ import {
   Clock, 
   TrendingUp, 
   Search, 
-  MessageSquare, 
   ChevronRight,
   RotateCw,
   Plus,
   Eye
 } from 'lucide-react';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { WhatsAppIcon } from '@/components/shared/WhatsAppIcon';
 import { ShopWithTenant } from '@/types/database';
 import { formatNaira, getWhatsAppReminderUrl } from '@/lib/utils';
 
@@ -341,7 +341,7 @@ export default function AdminDashboardPage() {
                             className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-[11px] font-bold transition-colors border border-emerald-200"
                             title="Send WhatsApp payment reminder"
                           >
-                            <MessageSquare className="w-3.5 h-3.5" />
+                            <WhatsAppIcon className="w-3.5 h-3.5" />
                             <span className="hidden md:inline">WhatsApp</span>
                           </a>
                         )}

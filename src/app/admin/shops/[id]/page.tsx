@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { 
   ArrowLeft, 
   Store, 
@@ -11,21 +11,21 @@ import {
   Phone, 
   Calendar, 
   CreditCard, 
-  MessageSquare, 
   CheckCircle2, 
   AlertCircle,
   Clock,
   Banknote
 } from 'lucide-react';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { WhatsAppIcon } from '@/components/shared/WhatsAppIcon';
 import { RecordPaymentModal } from '@/components/admin/RecordPaymentModal';
 import { ShopWithTenant, RentPayment } from '@/types/database';
 import { formatNaira, getWhatsAppReminderUrl } from '@/lib/utils';
 
-export default function ShopDetailPage() {
-  const params = useParams();
+export default function ShopDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
   const router = useRouter();
-  const shopId = params.id as string;
+  const shopId = resolvedParams.id;
 
   const [shop, setShop] = useState<ShopWithTenant | null>(null);
   const [payments, setPayments] = useState<RentPayment[]>([]);
@@ -188,7 +188,7 @@ export default function ShopDetailPage() {
                 rel="noopener noreferrer"
                 className="px-4 py-2.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100 transition-colors flex items-center gap-2"
               >
-                <MessageSquare className="w-4 h-4 text-emerald-600" />
+                <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
                 WhatsApp Tenant
               </a>
             )}

@@ -6,9 +6,7 @@ import Image from 'next/image';
 import { 
   Store, 
   Calendar, 
-  CreditCard, 
-  MessageSquare, 
-  Phone, 
+  CreditCard, Phone, 
   Copy, 
   Check, 
   ArrowRight,
@@ -17,6 +15,7 @@ import {
   QrCode
 } from 'lucide-react';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { WhatsAppIcon } from '@/components/shared/WhatsAppIcon';
 import { ReceiptModal } from '@/components/tenant/ReceiptModal';
 import { ShopWithTenant, RentPayment, Tenant } from '@/types/database';
 import { formatNaira } from '@/lib/utils';
@@ -243,7 +242,7 @@ export default function TenantShopPage() {
               rel="noopener noreferrer"
               className="flex-1 py-2 px-3 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100 transition-colors flex items-center justify-center gap-1.5"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+              <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-600" />
               WhatsApp Office
             </a>
             <a
